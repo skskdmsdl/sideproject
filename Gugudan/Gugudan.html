@@ -2,32 +2,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>좋아요</title>
+    <title>구구단</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
     <div id="root">
-        <!-- v-if, v-else는 동등한 형제고 붙어있다면 적용됨 -->
-        <!-- v가 붙은 속성들 안에는 v-if="" 여기서 따옴표 부분에는 자바스크립트 속성 사용 가능 -->
-        <div v-if="liked">좋아요 눌렀음</div>
-        <!-- <div v-else-if="liked + 1 === 5">좋아요 눌렀음</div> -->
-        <button v-else v-on:click="onClickButton">Like</button>
+        <div>{{first}}곱하기 {{second}}는?</div>
+        <form>
+            <!-- v-model은 input과 vue를 연결해줌 -->
+            <input type="number" v-model="value">
+            <button>입력</button>
+            <div>{{value}}</div>
+        </form>
+        <div id="result"></div>
     </div>
     
 </body>
 <script>
     const app = new Vue({
+        //id가 root인 태그를 통제하도록 만듦
         el: '#root',
-        //뷰가 관리해야하는 데이터를 적어줌
+        //react는 state를 선언하고 vue는 data를 만듦
         data: {
-            liked: false,
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            value: '',
+            result: '',
         },
-        methods: {
-            //클릭시 데이터를 바꿔줌(데이터만 관리하면 화면은 뷰가 알아서 바꿔줌)
-            onClickButton() {
-                this.liked = true;
-            },
-        },
+        methods: {},
     });
 </script>
 
