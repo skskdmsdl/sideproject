@@ -8,7 +8,7 @@
 <body>
     <div id="root">
         <div>{{first}}곱하기 {{second}}는?</div>
-        <form>
+        <form v-on:submit="onSubmitForm">
             <!-- v-model은 input과 vue를 연결해줌 -->
             <input type="number" v-model="value">
             <button>입력</button>
