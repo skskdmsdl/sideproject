@@ -8,9 +8,9 @@
 </head>
 <body>
     <div id="root">
-        <word-relay></word-relay>
-        <word-relay></word-relay>
-        <word-relay></word-relay>
+        <word-relay start-word="다같이"></word-relay>
+        <word-relay start-word="공부"></word-relay>
+        <word-relay start-word="해봐요"></word-relay>
     </div>
     <script>
         Vue.component('word-relay', {
@@ -26,11 +26,13 @@
                 <div>{{result}}</div>
             </div>
             `,
+            // startWord를 받음
+            props: ['startWord'],
             // 컴포넌트에서는 데이터를 함수형식으로 만들어 줘야함
             // 컴포넌트는 여러번 사용되는걸 전제로 하고있기 때문에 데이터가 각각 컴포넌트마다 달라야함
             data() {
                 return{
-                    word: '끝말잇기',
+                    word: this.startWord,
                     result: '',
                     value: '',
                 };
