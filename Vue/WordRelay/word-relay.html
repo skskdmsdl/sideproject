@@ -8,21 +8,32 @@
 </head>
 <body>
     <div id="root">
-        <div>{{word}}</div>
-        <form v-on:submit="onSubmitForm">
-            <input type="text" ref='answer' v-model="value">
-            <button type="submit">입력</button>
-        </form>
-        <div>{{result}}</div>
+        <word-relay></word-relay>
+        <word-relay></word-relay>
+        <word-relay></word-relay>
     </div>
     <script>
-        //Vue한테 코드 통제권을 넘김
-        const app = new Vue({
-            el: '#root',
-            data: {
-                word: '끝말잇기',
-                result: '',
-                value: '',
+        Vue.component('word-relay', {
+            // 컴포넌트의 템플릿은 하나의 태그로 꼭 묶어줘야함(규칙)
+            // 전역 컴포넌트
+            template: `
+            <div>
+                <div>{{word}}</div>
+                <form v-on:submit="onSubmitForm">
+                    <input type="text" ref='answer' v-model="value">
+                    <button type="submit">입력</button>
+                </form>
+                <div>{{result}}</div>
+            </div>
+            `,
+            // 컴포넌트에서는 데이터를 함수형식으로 만들어 줘야함
+            // 컴포넌트는 여러번 사용되는걸 전제로 하고있기 때문에 데이터가 각각 컴포넌트마다 달라야함
+            data() {
+                return{
+                    word: '끝말잇기',
+                    result: '',
+                    value: '',
+                };
             },
             methods: {
                 onSubmitForm(e) {
@@ -38,7 +49,13 @@
                         this.$refs.answer.focus();
                     }
                 }
-            },
+            }
+        })
+    </script>
+    <script>
+        // Vue한테 코드 통제권을 넘김(뷰 인스턴스 생성)
+        const app = new Vue({
+            el: '#root',
         });
     </script>
     
