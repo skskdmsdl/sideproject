@@ -1,5 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const path = require('path');
+// node에서는 require와 module.exports / vue에서는 import와 export default가 모듈 시스템
+
 
 module.exports = {
     mode: 'development', // 개발시에는 development, 배포시에는 production
