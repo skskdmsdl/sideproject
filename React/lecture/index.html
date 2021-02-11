@@ -44,11 +44,13 @@
                 // $('button').text('Liked'); 이런식으로 직접 바꿔줘야 했지만(제이쿼리) 리액트는 상태에 따라 자동으로 화면 바뀜!
 
                 // JSX (JS + XML) html보다는 xml에 가까움(문법이 엄격함)
+                // JSX는 다 createElement라고 보면 됨!
             }
         }
     </script>
     <script type="text/babel">
         // 위에 리액트로 컴포넌트를 만들겠다고 한 부분을 웹에 랜더링 해줌(화면에 반영해줌)
+        // LikeButton과 같이 대문자로 시작하는 것은 react 컴포넌트!
         ReactDOM.render(<div><LikeButton /><LikeButton /></div>, document.querySelector('#root'));  // likeButton을 #root안에 그림
     </script>
 </body>
