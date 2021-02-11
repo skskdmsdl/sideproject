@@ -6,14 +6,50 @@
     <title>Document</title>
     <!-- React를 실행. -->
     <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체 -->
-    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
     <!-- react코드를 웹에 붙여주는 역할 -->
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- 바벨 : JSX문법을 createElement문법으로 바꿔줌! -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
 </head>
 <body>
-    <div id="root"></div>
-    <script>
+    <div id="root"></div>  <!-- 결과 : <div id="root"><button>Like</button></div> -->
+    <script type="text/babel"> // 스크립트 속성으로 바벨을 넣어주면 바벨(자바스크립트 안에서 html태그 사용 -> 사실 xml임) 사용 가능
+        const e = React.createElement;  // 태그를 만들어주는 함수(html 태그를 만든다고 생각하기)
 
+        // 컴포넌트(class하나를 컴포넌트 하나라고 생각하기)
+        // React안에 컴포넌트가 들어있음 -> 그걸 상속해옴
+        // class는 기본적으로 constructor가 있다고 생각하기
+        class LikeButton extends React.Component {
+            // 컴포넌트가 실행될 때 제일 먼저 실행되는 부분
+            constructor(props) {
+                super(props);
+                // React의 장점중 하나인 status -> 바뀔 여지가 있는 부분!
+                this.state = {   // 상태를 다 적어줌
+                    liked: false,
+                };
+            }
+
+            // LikeButton안의 render는 좋아요 버튼을 어떻게 화면에 표시할 것인지를 결정해주는 method
+            render() {
+                // 밑에처럼 쓴것을 html코드로 쓸 수 있음(그러나 자바스크립트에서 html문법을 지원하지 않기때문에 바벨을 써줘야 함)
+                return <button type="submit" onClick={() => { this.setState({ liked: true })}}>  
+                    { this.state.liked === true ? 'Liked' : 'Like' }
+                    </button>; 
+                    // e(
+                    // 'button', 
+                    // { onClick: () => { this.setState({ liked: true }) }, type: 'submit' },  // { 속성들을 적어주는 곳 } 속성은 camelCase
+                    // this.state.liked === true ? 'Liked' : 'Like');  // 상태에 따라 화면이 자동으로 바뀜!!!!! awesome!
+                // <button onclick="() => { this.setState({ liked: true }) }" type="submit">Like</button> 이런 태그를 만들겠다는 의미
+                // $('button').text('Liked'); 이런식으로 직접 바꿔줘야 했지만(제이쿼리) 리액트는 상태에 따라 자동으로 화면 바뀜!
+
+                // JSX (JS + XML) html보다는 xml에 가까움(문법이 엄격함)
+            }
+        }
+    </script>
+    <script type="text/babel">
+        // 위에 리액트로 컴포넌트를 만들겠다고 한 부분을 웹에 랜더링 해줌(화면에 반영해줌)
+        ReactDOM.render(<div><LikeButton /><LikeButton /></div>, document.querySelector('#root'));  // likeButton을 #root안에 그림
     </script>
 </body>
 </html>
