@@ -1,4 +1,5 @@
 const path = require('path');  // 노드에서 경로 쉽게 조작하도록 하는 것 (그냥 외우자!!!)
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
     name: 'word-relay-setting',
@@ -29,15 +30,27 @@ module.exports = {
                     }], 
                     '@babel/preset-react'
                 ],
-                plugins: ['@babel/plugin-proposal-class-properties'],
+                plugins: [
+                    '@babel/plugin-proposal-class-properties',
+                    'react-refresh/babel',
+                ],
             },
         }],
     },  
 
-    plugins: [],
+    plugins: [
+        new RefreshWebpackPlugin()
+    ],
 
     output: {
         path: path.join(__dirname, 'dist'),  // __dirname 는 현재폴더
-        filename: 'app.js'
-    }
+        filename: 'app.js',
+        publicPath: './dist/',
+    },
+
+    devServer: {
+        publicPath: './dist/',
+        hot: true,
+        port: 9090
+    },
 };
