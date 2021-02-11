@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+</head>
+<body>
+    <div id="root"></div>  
+    <script type="text/babel"> 
+        // class GuGuDan extends React.Component {
+        
+        // class를 함수 컴포넌트로 바꿀 수 있음(setState나 ref를 쓰지 않는 컴포넌트의 경우)
+        // 나는 함수를 좋아하는데 여기서도 setState와 ref를 쓸 수 있게 해줘라! -> React Hooks
+        const GuGuDan = () => {
+            // state 선언 방식(class와 다르게 하나씩 분리) : const [state, setState] = 초기값
+            // 구구단 컴포넌트 안에 꼭 넣어줘야함(바깥으로 빼면 X)
+            const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+            const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+            const [value, setValue] = React.useState('');
+            const [result, setResult] = React.useState('');
+            const inputRef = React.useRef(null);
+
+            const onSubmitForm = (e) => {
+                e.preventDefault();
+                if(parseInt(value) === first * second){
+                    setResult(value + '❗ 정답 🎉');
+                    setFirst(Math.ceil(Math.random() * 9));
+                    setSecond(Math.ceil(Math.random() * 9));
+                    setValue('');
+                    inputRef.current.focus();
+                } else {
+                    setResult('땡');
+                    setValue('');
+                    inputRef.current.focus();
+                }
+            };
+
+            // value를 state할때는 setValue를 써주기
+            const onChangeInput = (e) => {
+                setValue(e.target.value);
+            };
+
+            console.log('렌더링'); // state가 바뀌면 함수 전체를 다시 실행하기에 조금 더 느릴 수 있음!
+            // class -> className
+            // for -> htmlFor
+            return (
+                <React.Fragment> 
+                    <div>{first} 곱하기 {second}는?</div>
+                    <form onSubmit={onSubmitForm}>
+                        <input ref={inputRef} type="number" value={value} onChange={onChangeInput}/>  
+                        <button type="submit">입력!</button>
+                    </form>
+                    <div id="result">{result}</div>
+                </React.Fragment>
+            );
+        }
+    </script>
+    <script type="text/babel">
+        ReactDOM.render(<GuGuDan />, document.querySelector('#root'));  
+    </script>
+</body>
+</html>
