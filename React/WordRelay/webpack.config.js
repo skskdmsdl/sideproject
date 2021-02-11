@@ -21,7 +21,7 @@ module.exports = {
             test: /\.jsx?/,
             loader: 'babel-loader',
             options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
+                presets: ['@babel/preset-env', '@babel/preset-react'],  // presets 플러그인들의 모음
                 plugins: ['@babel/plugin-proposal-class-properties'],
             },
         }],
