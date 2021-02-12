@@ -27,6 +27,7 @@ module.exports = {
                         targets: {
                             browsers: ['> 1% in KR'],  
                         },
+                        debug: true,
                     }], 
                     '@babel/preset-react'
                 ],
@@ -45,12 +46,12 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),  // __dirname 는 현재폴더
         filename: 'app.js',
-        publicPath: './dist/',
+        publicPath: '/dist/',
     },
 
     devServer: {
-        publicPath: './dist/',
+        publicPath: '/dist/',
         hot: true,
-        port: 9090
+        port: 9090,
     },
 };
