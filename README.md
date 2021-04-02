@@ -1,4 +1,4 @@
-# sideproject
+# side project
 🎁 Side Project
 
 # Overview
